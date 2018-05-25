@@ -2,7 +2,7 @@
 
 # 1. 交易流程
 
-![BBPAY](images/flow.jpge)
+![BBPAY](img/flow.png)
 
 # 2. 準備工作
 
@@ -54,7 +54,7 @@ https://{domin}/pay/apiv1
 
 (1) 將hash_key(由BBPAY提供，僅計算時使用)加入計算參數
 
-(2) 將參數依照第一個英文字母由a到z之順序進行排序(若遇到第一個字母重複時，則使用第二個字母，以此類推)，並使用符號&將其串聯成字串。
+(2) 將參數依照主鍵排序，並將主鍵與值以"="串聯，再使用"&"將所有參數串聯成字串
 ```
 hash_key=bf4afdc83bb6ebb0aba152fd0d22d6a3&merchant_id=2e3fac58cc0f67f561b5f04a552e0240&name=api test&notice=https://www.google.com.tw/&total=900&type_id=3&vendor_uid=3038724587764591
 ```
