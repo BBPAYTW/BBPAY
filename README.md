@@ -6,9 +6,11 @@
 
 # 2. 準備工作
 
-- 商家編號(merchant_id)：由BBPAY另行提供
-- 加密金鑰(hash_key)：由BBPAY另行提供
-- 接口路徑(API URL)：由BBPAY另行提供
+|參數|測試|正式|
+|:--|:--|:--|
+|商家編號(merchant_id)|9b39a23316ab3c27651b84429ac0bf06|由BBPAY另行提供|
+|加密金鑰(hash_key)|52ee57cc13879998b7836f941cbf68ef|由BBPAY另行提供|
+|接口路徑(API URL)|由BBPAY另行提供|由BBPAY另行提供|
 
 # 3. 產生訂單
 
@@ -26,7 +28,7 @@ https://{domin}/pay/apiv1
 |name|是|String|商品名稱
 |total|是|Integer|訂單金額，須為大於零之整數
 |notice|否|String|付款完成通知回傳網址
-|hash|是|String|檢查碼，計算機制詳見附錄
+|hash|是|String|檢查碼，計算機制詳見<a href = "#appendix">附錄<a>
 
 ## 回傳參數說明
 
@@ -45,20 +47,19 @@ https://{domin}/pay/apiv1
 |參數名稱|參數格式|參數說明
 |:--|:--|:--
 |code|Integer|通知狀態(0：成功)
-|vendor_uid|String|商家所提供之訂單編號
-|total|Integer|商家所提供之訂單金額
+|data|JSON Objects|回傳資料，參數包含商家所提供之訂單編號(vendor_uid)及訂單金額(total)
 
-# 5.附錄
+# <p id = "appendix">5.附錄<p>
 
 ## 檢查碼計算機制
 
 (1) 將hash_key(由BBPAY提供，僅計算時使用)加入計算參數
 
-(2) 將參數依照主鍵排序，並將主鍵與值以"="串聯，再使用"&"將所有參數串聯成字串
+(2) 將參數依照主鍵排序(由小到大)，並將主鍵與值以"="串聯，再使用"&"將所有參數串聯成字串
 ```
-hash_key=bf4afdc83bb6ebb0aba152fd0d22d6a3&merchant_id=2e3fac58cc0f67f561b5f04a552e0240&name=api test&notice=https://www.google.com.tw/&total=900&type_id=3&vendor_uid=3038724587764591
+hash_key=52ee57cc13879998b7836f941cbf68ef&merchant_id=9b39a23316ab3c27651b84429ac0bf06&name=api test&notice=https://{your url}&total=900&type_id=3&vendor_uid=00000000000000000001
 ```
 (3) 將字串透過MD5雜湊
 ```
-a7d5f901e2ef580b8afe80c39bfef3f8
+1d994bd8cb7f963447146c92b16d0bd2
 ```
